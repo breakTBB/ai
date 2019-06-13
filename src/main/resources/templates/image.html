@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/online">
+<head>
+	<script th:src="@{~/js/upAndDiss.js}" type="text/javascript"></script>
+<title th:text="${image.getTitle()}">Topic's title</title>
+</head>
+<body>
+	<main layout:fragment="content">
+	<article class="container" style="padding: 3% 0 2%;">
+		<header class="row">
+			<div class="col s12">
+				<blockquote class="flow-text left" th:text="${image.getTitle()}">Topic's
+					title</blockquote>
+			</div>
+		</header>
+		<section class="row">
+			<div class="col s12">
+				<!-- <a th:href="@{'/profile/' + ${image.getIdUser()}}">
+					<span class="chip left" th:text="${userDao.getUsernameById(image.getIdUser())}">Image's author</span>
+				</a> -->
+				<a th:href="@{'/profile/' + ${image.getIdUser()}}">
+					<div class="chip left">
+						<span th:text="${userDao.getUsernameById(image.getIdUser())}" th:href="@{'/profile/' + ${image.getIdUser()}}">Topic's author</span>
+					</div>
+				</a>
+				<span class="right" th:text="${image.displayParsedCreatedDate()}"></span>
+			</div>
+		</section>
+		<section class="row">
+			<img class="col s12"
+				style="text-align: justify; display: block; white-space: pre-wrap"
+				th:src="@{'~/' + ${image.getContent()} }"></img>
+		</section>
+		<section>
+			<a href="#" th:abbr="@{'up/' + ${image.getId()}}" id="u" onclick="up()">
+				<div class="chip left">
+					<span th:text="|UP|">UP</span>
+				</div>
+			</a>
+		</section>
+		<section>
+			<a href="#" th:abbr="@{'diss/' + ${image.getId()}}" id="d" onclick="diss()">
+				<div class="chip left">
+					<span th:text="|DISS|">DISS</span>
+				</div>
+			</a>
+		</section>
+		<header class="row">
+			<div class="col s12">
+				<blockquote class="flow-text left" th:text="|评论: | + ${answers.size()}">Number of answers</blockquote>
+			</div>
+		</header>
+		<section class="row">
+			<div class="col s12" th:each="answer : ${answers}" style="margin: 3% 0 3%; padding: 2%; border-top-right-radius: 10px; border-bottom-right-radius: 10px; background: linear-gradient(to right, #e7e4e4, #f3f2f2); background: -webkit-linear-gradient(left, #e7e4e4, #f3f2f2); background: -o-linear-gradient(right, #e7e4e4, #f3f2f2); background: -moz-linear-gradient(right, #e7e4e4, #f3f2f2);">
+				<a th:href="@{'/profile/' + ${answer.getIdUser()}}"> 
+					<span class="chip left" style="background-color: #f3f2f2;" th:text="${userDao.getUsernameById(answer.getIdUser())}">Answer's author</span>
+				</a>
+				<span class="chip left" th:if="${answer.isUseful()}" th:text="|Useful|" style="background-color: #ee6e73;">Useful </span> 
+				<span class="right" th:text="${answer.displayParsedCreatedDate()}"> </span>
+				<span th:if="${answer.getIdUser() == idUser}">
+					<form th:action="@{/image/{image.getId()}}" method="post">
+						<input type="hidden" name="id_answer" th:value="${answer.getId()}" />
+						<input type="hidden" name="action" th:value="delete" /> 
+						<input type="hidden" name="id_topic" th:value="${image.getId()}" />
+						<button class="chip left" style="background-color: #37b7ab;">Delete</button>
+					</form>
+				</span>
+				<div class="row">
+					<p class="col s12" style="text-align: justify; display: block; white-space: pre-wrap" th:text="${answer.getContent()}">Answer's content</p>
+				</div>
+				<div class="row">
+					<code style="display: block; white-space: pre-wrap" class="col s12" th:text="${answer.displayCode()}"> Source code </code>
+				</div>
+			</div>
+		</section>
+		<header class="row">
+			<div class="col s12">
+				<blockquote class="flow-text left" th:text="|留下你的评论: |">Add answer</blockquote>
+			</div>
+		</header>
+		<section>
+			<form th:action="@{/image}" method="post">
+				<div class="row">
+					<div class="col s12">
+						<label>Content: <textarea name="content"
+								class="materialize-textarea" maxlength="1024" data-length="1024"
+								required="required"></textarea>
+						</label>
+					</div>
+				</div>
+				<input type="hidden" name="id_topic" th:value="${image.getId()}" />
+				<input type="hidden" name="id_user" th:value="${idUser}" />
+				<div class="row">
+					<div class="col s12 center">
+						<button class="btn waves-effect waves-light btn-large"
+							type="submit" name="answer">评论</button>
+					</div>
+				</div>
+			</form>
+		</section>
+	</article>
+	</main>
+</body>
+</html>

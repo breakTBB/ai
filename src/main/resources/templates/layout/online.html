@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="description" content="Programming forum about Java powered by Spring Framework"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+        <title>AI识图</title>
+
+        <link th:href="@{~/css/materialize.min.css}" rel="stylesheet" type="text/css"/>
+        <link th:href="@{~/css/icon.css}" rel="stylesheet" type="text/css"/>
+
+    </head>
+    <body>
+        <nav>
+            <div class="nav-wrapper">
+                <div class="container">
+                    <ul id="nav-left" class="left hide-on-med-and-down">
+                        <!--<li><a th:href="@{'images/logo/sicau.png'}"></a></li>-->
+                        <li><a th:href="@{'/images/all/1'}">所有</a></li>
+                        <li><a th:href="@{'/images/植物/1'}">植物</a></li>
+                        <li><a th:href="@{'/images/动物/1'}">动物</a></li>
+                        <li><a th:href="@{'/images/车辆/1'}">车辆</a></li>
+                    </ul>
+                    <ul id="nav-right" class="right hide-on-med-and-down">
+                        <li><a th:href="@{'/addTopic'}">上传图片</a></li>
+                        <!--<li><a th:href="@{'/message'}">通知<span class="new badge" th:text="${newMessage}">2</span></a></li>-->
+                        <li><a th:href="@{'/rank'}">热榜</a></li>
+                        <li><a th:href="@{'/profile/'+${user.getId()}}" th:text="${user.getUsername()}">简介</a></li>
+                        <li><a th:href="@{'/logout'}">登出</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <main layout:fragment="content">
+            <p>Default content</p>
+        </main>
+
+        <script type="text/javascript" th:src="@{~/js/jquery.min.js}"></script>
+        <script type="text/javascript" th:src="@{~/js/materialize.js}"></script>
+    </body>
+</html>

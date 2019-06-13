@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/online">
+<head>
+    <script type="text/javascript" th:src="@{~/js/javascript.js}"></script>
+    <link rel="stylesheet" th:href="@{~/css/css.css}"/>
+    <title>上传图片</title>
+</head>
+<body>
+    <main layout:fragment="content">
+        <article class="container" style="padding: 3% 0 2%;">
+            <header class="row">
+                <div class="col s12">
+                    <blockquote class="flow-text left" th:text="|选择类别并解析|">Analyze</blockquote>
+                </div>
+            </header>
+            <section>
+                <!--<form>-->
+                    <div class="row">
+                        <div class="col s12 center">
+                                <input value="植物" name="category" class="with-gap" type="radio" id="plant" required="required"/>
+                                <label for="plant">植物</label>
+
+                                <input value="动物" name="category" class="with-gap" type="radio" id="animal" required="required"/>
+                                <label for="animal">动物</label>
+
+                                <input value="车辆" name="category" class="with-gap" type="radio" id="car" required="required"/>
+                                <label for="car">车辆</label>
+                        </div>
+                    </div>
+
+                    <div class="background center" id="background" style="height: 398px;"></div>
+                    <div class="search center">
+                        <input type="text" placeholder="请输入网络图片URL" class="search_url" id="searchViaUrl" onKeyup="searchByUrl()" />
+                        <button class="search_but" id="search_b" onClick="detectUrl()">检测</button>
+                        <div class="search_add">或</div>
+                        <label class="search_local">
+                            <input type="file" accept="image/png,image/bmp,image/jpg,image/jpeg" class="search_local_input" id="search_local" onchange="searchByLocal()" />
+                            上传图片
+                        </label>
+                    </div>
+                    <input type="hidden" name="id_user" th:value="${user.getId()}"/>
+
+                <!--</form>-->
+            </section>
+        </article>
+    </main>
+</body>
+</html>

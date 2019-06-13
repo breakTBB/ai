@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="description" content="Programming forum about Java powered by Spring Framework"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <title>AI图片识别社区</title>
+
+    <link th:href="@{~/css/materialize.min.css}" rel="stylesheet" type="text/css"/>
+
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <div class="container">
+				<ul id="nav-left" class="left hide-on-med-and-down">
+                    <li><a th:href="@{'/'}" style="font-size:25px;color:white">图片识别</a></li>
+                </ul>
+                            
+                <ul id="nav-left" class="right hide-on-med-and-down">
+                    <li><a th:href="@{'/'}">主页</a></li>
+                    <li><a th:href="@{'/login'}">登录</a></li>
+                    <li><a th:href="@{'/register'}">注册</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main layout:fragment="content">
+        <p>Default content</p>
+    </main>
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">AI 识图</h5>
+                    <p class="white-text">图片识别</p>
+                    <p class="white-text">给图片赞、踩、评论</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li><a class="white-text" th:href="aboutUs.html">组员</a></li>
+                        <li><a class="white-text" th:href="title.html">2019年Java课终作业</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script type="text/javascript" th:src="@{~/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{~/js/materialize.js}"></script>
+</body>
+</html>
